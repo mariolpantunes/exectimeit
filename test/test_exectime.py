@@ -6,40 +6,31 @@ __email__ = 'mariolpantunes@gmail.com'
 __status__ = 'Development'
 
 
+import time
 import unittest
 import exectime.timeit as timeit
 
 
-@timeit.exectime(10)
-def fibonacci(n):
-    a = 0
-    b = 1
-     
-    # Check is n is less
-    # than 0
-    if n < 0:
-        print("Incorrect input")
-         
-    # Check is n is equal
-    # to 0
-    elif n == 0:
-        return 0
-       
-    # Check if n is equal to 1
-    elif n == 1:
-        return b
-    else:
-        for _ in range(1, n):
-            c = a + b
-            a = b
-            b = c
-        return b
+@timeit.exectime(3)
+def one_second():
+    time.sleep(1)
+
+
+@timeit.exectime(3)
+def two_second():
+    time.sleep(2)
 
 
 class TestExecTime(unittest.TestCase):
-    def test_00(self):
-        r = fibonacci(30)
-        print(f'{r}')
+    def test_decorator_one_second(self):
+        t, _, _ = one_second()
+        desired = 1.0
+        self.assertAlmostEqual(t, desired, 2)
+    
+    def test_decorator_two_second(self):
+        t, _, _ = two_second()
+        desired = 2.0
+        self.assertAlmostEqual(t, desired, 2)
 
 
 if __name__ == '__main__':

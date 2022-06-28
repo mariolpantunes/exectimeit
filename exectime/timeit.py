@@ -17,33 +17,37 @@ def RSE(y, y_hat):
     return rse
 
 
-def exectime(n):
+def timeit(n, fn, *args, **kwargs):
+    # execute first time
+    begin = time.perf_counter()
+    rv = fn(*args, **kwargs)
+    end = time.perf_counter()
+
+    # durations list 
+    durations = [end-begin]
+
+    for i in range(1, n):
+        begin = time.perf_counter()
+        for _ in range(i+1):
+            fn(*args, **kwargs)
+        end = time.perf_counter()
+
+        durations.append(end-begin)
+    
+    # convert to milliseconds:
+    #durations = [1000*seconds for seconds in durations]
+
+    x = np.arange(1, n+1)
+    m, b = np.polyfit(x, durations, 1)
+
+    y_hat = x*m+b
+
+    return m, RSE(durations, y_hat), rv
+
+
+def exectime(n=3):
     def decorate(fn):
         def wrapper(*args, **kwargs):
-            # execute first time
-            begin = time.perf_counter()
-            rv = fn(*args, **kwargs)
-            end = time.perf_counter()
-
-            # durations list 
-            durations = [end-begin]
-
-            for i in range(1, n):
-                begin = time.perf_counter()
-                for _ in range(i+1):
-                    fn(*args, **kwargs)
-                end = time.perf_counter()
-
-                durations.append(end-begin)
-            
-            # convert to milliseconds:
-            durations = [1000*seconds for seconds in durations]
-
-            x = np.arange(1, n+1)
-            m, b = np.polyfit(x, durations, 1)
-
-            y_hat = x*m+b
-
-            return m, RSE(durations, y_hat), rv
+            return timeit(n, fn, *args, **kwargs)
         return wrapper
     return decorate
