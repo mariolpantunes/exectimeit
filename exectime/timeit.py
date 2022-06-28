@@ -27,15 +27,14 @@ def timeit(n, fn, *args, **kwargs):
     durations = [end-begin]
 
     for i in range(1, n):
-        begin = time.perf_counter()
+        d = 0
         for _ in range(i+1):
+            begin = time.perf_counter()
             fn(*args, **kwargs)
-        end = time.perf_counter()
+            end = time.perf_counter()
+            d += end-begin
 
-        durations.append(end-begin)
-    
-    # convert to milliseconds:
-    #durations = [1000*seconds for seconds in durations]
+        durations.append(d)
 
     x = np.arange(1, n+1)
     m, b = np.polyfit(x, durations, 1)
