@@ -25,23 +25,31 @@ def timeit(n, fn, *args, **kwargs):
 
     # durations list 
     durations = [end-begin]
-
-    for i in range(1, n):
-        d = 0
-        for _ in range(i+1):
+    
+    if n < 3:
+        for i in range(1, n):
             begin = time.perf_counter()
             fn(*args, **kwargs)
             end = time.perf_counter()
-            d += end-begin
+            durations.append(end-begin)
+        return np.mean(durations), np.std(durations), rv
+    else:
+        for i in range(1, n):
+            d = 0
+            for _ in range(i+1):
+                begin = time.perf_counter()
+                fn(*args, **kwargs)
+                end = time.perf_counter()
+                d += end-begin
 
-        durations.append(d)
+            durations.append(d)
 
-    x = np.arange(1, n+1)
-    m, b = np.polyfit(x, durations, 1)
+        x = np.arange(1, n+1)
+        m, b = np.polyfit(x, durations, 1)
 
-    y_hat = x*m+b
+        y_hat = x*m+b
 
-    return m, RSE(durations, y_hat), rv
+        return m, RSE(durations, y_hat), rv
 
 
 def exectime(n=3):
