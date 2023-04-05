@@ -31,7 +31,7 @@ Run the following commands to produce the documentation for this library.
 
 ```bash
 pip install pdoc
-pdoc --math -d google -o docs knee \
+pdoc --math -d google -o docs exectime \
 --logo https://raw.githubusercontent.com/mariolpantunes/exectime/main/media/stopwatch.png \
 --favicon https://raw.githubusercontent.com/mariolpantunes/exectime/main/media/stopwatch.png
 ```
