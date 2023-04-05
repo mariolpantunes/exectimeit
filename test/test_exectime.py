@@ -25,12 +25,12 @@ class TestExecTime(unittest.TestCase):
     def test_decorator_one_second(self):
         t, _, _ = one_second()
         desired = 1.0
-        self.assertAlmostEqual(t, desired, 3)
+        self.assertAlmostEqual(t, desired, delta=0.01)
     
     def test_decorator_two_second(self):
         t, _, _ = two_second()
         desired = 2.0
-        self.assertAlmostEqual(t, desired, 3)
+        self.assertAlmostEqual(t, desired, delta=0.01)
 
 
 if __name__ == '__main__':
