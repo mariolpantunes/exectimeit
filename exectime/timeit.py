@@ -11,13 +11,46 @@ import time
 import numpy as np
 
 
-def RSE(y, y_hat):
+from typing import Callable 
+
+
+def RSE(y: np.ndarray, y_hat: np.ndarray) -> float:
+    """
+    Return the Root Square Error (RSE):
+    $$
+    rse = \\sqrt{\\sum (y-\\hat{y})^{2}}
+    $$
+
+    Args:
+        y     (np.ndarray): numpy array
+        y_hat (np.ndarray): numpy array
+    Returns:
+        int: Root Square Error (RSE)
+    """
     RSS = np.sum(np.square(y - y_hat))
     rse = math.sqrt(RSS / (len(y) - 2))
     return rse
 
 
-def timeit(n, fn, *args, **kwargs):
+def timeit(n:int, fn:Callable, *args, **kwargs) -> tuple:
+    """
+    Measures the execution time using a stable algorithms
+    that minimizes systematic and random errors.
+
+    The algorithm was proposed by Carlos Moreno and
+    Sebastian Fischmeister here:
+    https://doi.org/10.1109/LES.2017.2654160
+
+    Args:
+        n       (int): number of repetitions
+        fn (Callable): numpy array
+        args       ():
+        kwargs     ():
+    Returns:
+        tuple: (mean execution time,
+        variantion on execution,
+        fn result)
+    """
     # execute first time
     begin = time.perf_counter()
     rv = fn(*args, **kwargs)
@@ -52,9 +85,19 @@ def timeit(n, fn, *args, **kwargs):
         return m, RSE(durations, y_hat), rv
 
 
-def exectime(n=3):
-    def decorate(fn):
-        def wrapper(*args, **kwargs):
-            return timeit(n, fn, *args, **kwargs)
+def exectime(n:int=4) -> Callable:
+    """
+    Implements a decorator that executes exectime.timeit on
+    a specified function.
+
+    Args:
+        n (int): number of repetitions (default: 4)
+        
+    Returns:
+        Callable: python decorator for exectime.timeit
+    """
+    def decorate(fn: Callable) -> Callable:
+        def wrapper(*args, **kwargs) -> tuple:
+            return timeit(n, fn, *args, **kwargs) 
         return wrapper
     return decorate
