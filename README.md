@@ -60,4 +60,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <a href="https://www.flaticon.com/free-icons/time" title="time icons">Time icons created by Freepik - Flaticon</a>
 
-![Python CI](https://github.com/mariolpantunes/exectime/workflows/Python%20CI/badge.svg)
+![Python CI](https://github.com/mariolpantunes/exectimeit/workflows/Python%20CI/badge.svg)

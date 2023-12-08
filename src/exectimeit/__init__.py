@@ -24,4 +24,4 @@ The overall execution time can then be obtained by taking the slope a from the f
 The authors also note that this type of measurement is very robust against occasional measurements with large errors.
 """
 
-import exectime.timeit
+import exectimeit.timeit

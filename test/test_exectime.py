@@ -8,7 +8,7 @@ __status__ = 'Development'
 
 import time
 import unittest
-import exectime.timeit as timeit
+import exectimeit.timeit as timeit
 
 
 @timeit.exectime(3)
