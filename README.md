@@ -40,7 +40,7 @@ pdoc --math -d google -o docs exectime \
 
 The library can be used by adding this line to the requirement.txt file:
 ```txt
-git+https://github.com/mariolpantunes/knee@main#egg=knee
+git+https://github.com/mariolpantunes/exectime@main#egg=exectime
 ```
 
 ## Usage
