@@ -59,3 +59,5 @@ C. Moreno and S. Fischmeister, "Accurate Measurement of Small Execution Times—
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 <a href="https://www.flaticon.com/free-icons/time" title="time icons">Time icons created by Freepik - Flaticon</a>
+
+![Python CI](https://github.com/mariolpantunes/exectime/workflows/Python%20CI/badge.svg)
