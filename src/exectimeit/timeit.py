@@ -52,37 +52,35 @@ def timeit(n:int, fn:Callable, *args, **kwargs) -> tuple:
         fn result)
     """
     # execute first time
-    begin = time.perf_counter()
+    begin = time.perf_counter_ns()
     rv = fn(*args, **kwargs)
-    end = time.perf_counter()
+    end = time.perf_counter_ns()
 
     # durations list 
     durations = [end-begin]
     
     if n < 3:
-        for i in range(1, n):
-            begin = time.perf_counter()
-            fn(*args, **kwargs)
-            end = time.perf_counter()
-            durations.append(end-begin)
+        begin = time.perf_counter_ns()
+        fn(*args, **kwargs)
+        fn(*args, **kwargs)
+        end = time.perf_counter_ns()
+        durations.append(end-begin)
         return np.mean(durations), np.std(durations), rv
     else:
         for i in range(1, n):
             d = 0
             for _ in range(i+1):
-                begin = time.perf_counter()
+                begin = time.perf_counter_ns()
                 fn(*args, **kwargs)
-                end = time.perf_counter()
+                end = time.perf_counter_ns()
                 d += end-begin
-
             durations.append(d)
 
         x = np.arange(1, n+1)
-        m, b = np.polyfit(x, durations, 1)
-
+        m, b = np.polyfit(x, durations, deg=1)
         y_hat = x*m+b
 
-        return m, RSE(durations, y_hat), rv
+        return m/1E9, RSE(durations, y_hat)/1E9, rv
 
 
 def exectime(n:int=4) -> Callable:
