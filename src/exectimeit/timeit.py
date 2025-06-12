@@ -1,7 +1,7 @@
 # coding: utf-8
 
 __author__ = 'Mário Antunes'
-__version__ = '0.1'
+__version__ = '0.1.2'
 __email__ = 'mariolpantunes@gmail.com'
 __status__ = 'Development'
 
@@ -51,36 +51,54 @@ def timeit(n:int, fn:Callable, *args, **kwargs) -> tuple:
         variantion on execution,
         fn result)
     """
+
+    if n <= 2:
+        raise RuntimeError("Number of iterations too low, we recomend n equal or greater than 3.")
+
+    # warm-up: execute and discard time
+    fn(*args, **kwargs)
+
+    # durations array
+    durations = np.empty((n,), dtype='f4')
+
     # execute first time
     begin = time.perf_counter_ns()
     rv = fn(*args, **kwargs)
     end = time.perf_counter_ns()
+    durations[0] = end-begin
 
-    # durations list 
-    durations = [end-begin]
+    begin = time.perf_counter_ns()
+    fn(*args, **kwargs)
+    fn(*args, **kwargs)
+    end = time.perf_counter_ns()
+    durations[1] = end-begin
     
-    if n < 3:
-        begin = time.perf_counter_ns()
-        fn(*args, **kwargs)
-        fn(*args, **kwargs)
-        end = time.perf_counter_ns()
-        durations.append(end-begin)
-        return np.mean(durations), np.std(durations), rv
-    else:
-        for i in range(1, n):
-            d = 0
+    begin = time.perf_counter_ns()
+    fn(*args, **kwargs)
+    fn(*args, **kwargs)
+    fn(*args, **kwargs)
+    end = time.perf_counter_ns()
+    durations[2] = end-begin
+    
+    if n > 3:
+        for i in range(3, n):
+            d = 0.0
             for _ in range(i+1):
                 begin = time.perf_counter_ns()
                 fn(*args, **kwargs)
                 end = time.perf_counter_ns()
                 d += end-begin
-            durations.append(d)
+            durations[i] = d
 
-        x = np.arange(1, n+1)
-        m, b = np.polyfit(x, durations, deg=1)
-        y_hat = x*m+b
+    x = np.arange(1, n+1)
+    m, b = np.polyfit(x, durations, deg=1)
 
-        return m/1E9, RSE(durations, y_hat)/1E9, rv
+    if m <= 0:
+        raise RuntimeError("Estimated Negative execution time, please increase the number of folds.")
+
+    y_hat = x*m+b
+
+    return m/1E9, RSE(durations, y_hat)/1E9, rv
 
 
 def exectime(n:int=4) -> Callable:
