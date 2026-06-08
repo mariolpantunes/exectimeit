@@ -2,9 +2,9 @@ name: Python CI
 
 on:
   push:
-    branches: [ main, wip ]
+    branches: [main, wip]
   pull_request:
-    branches: [ main, wip ]
+    branches: [main, wip]
 
 jobs:
   test:
@@ -15,9 +15,9 @@ jobs:
       matrix:
         python-version: ["3.8", "3.10", "3.12", "3.14"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
@@ -33,9 +33,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Install pdoc
@@ -52,7 +52,8 @@ jobs:
             cp assets/logo.svg docs/exectimeit/assets/logo.svg
           fi
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
+          branch: gh-pages
