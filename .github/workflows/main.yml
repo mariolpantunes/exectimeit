@@ -45,12 +45,14 @@ jobs:
           PYTHONPATH=src pdoc --math -d google -o docs exectimeit \
             --logo "assets/logo.svg" \
             --favicon "assets/logo.svg"
-      - name: Verify logo in docs
-        run: |
-          if [ ! -f docs/exectimeit/assets/logo.svg ]; then
-            mkdir -p docs/exectimeit/assets
-            cp assets/logo.svg docs/exectimeit/assets/logo.svg
-          fi
+
+          # Ensure root assets are available for index page
+          mkdir -p docs/assets
+          cp assets/logo.svg docs/assets/logo.svg
+
+          # Prevent GitHub Pages from using Jekyll
+          touch docs/.nojekyll
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
