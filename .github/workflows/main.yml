@@ -15,7 +15,7 @@ jobs:
       matrix:
         python-version: ["3.10", "3.12", "3.14"]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Install Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
         with:
@@ -49,6 +49,10 @@ jobs:
           # Ensure root assets are available for index page
           mkdir -p docs/assets
           cp assets/logo.svg docs/assets/logo.svg
+
+          # Ensure module assets are available for sub-pages
+          mkdir -p docs/exectimeit/assets
+          cp assets/logo.svg docs/exectimeit/assets/logo.svg
 
           # Prevent GitHub Pages from using Jekyll
           touch docs/.nojekyll
