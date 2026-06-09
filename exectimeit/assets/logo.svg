@@ -1,0 +1,28 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background: Nord0 (Deep Polar Night) -->
+  <rect width="128" height="128" rx="24" fill="#2e3440"/>
+
+  <!-- Stop Button: Nord10 (Frost Blue) -->
+  <rect x="54" y="12" width="20" height="8" rx="4" fill="#5e81ac"/>
+
+  <!-- Clock Face: Nord4 (Snow Storm) -->
+  <circle cx="64" cy="64" r="42" stroke="#d8dee9" stroke-width="6" fill="none"/>
+
+  <!-- Ticks: Nord4 (Snow Storm) -->
+  <line x1="64" y1="22" x2="64" y2="28" stroke="#d8dee9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="64" y1="106" x2="64" y2="100" stroke="#d8dee9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="22" y1="64" x2="28" y2="64" stroke="#d8dee9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="106" y1="64" x2="100" y2="64" stroke="#d8dee9" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Hour Hand: Nord8 (Frost Blue Light) - Pointing to ~2 o'clock -->
+  <line x1="64" y1="64" x2="82" y2="52" stroke="#88c0d0" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Minute Hand: Nord9 (Frost Blue) - Pointing to ~40 mins -->
+  <line x1="64" y1="64" x2="40" y2="75" stroke="#81a1c1" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Second Hand: Nord6 (Snow Storm Bright) -->
+  <line x1="64" y1="64" x2="70" y2="35" stroke="#eceff4" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Center Pin: Nord4 (Snow Storm) -->
+  <circle cx="64" cy="64" r="4" fill="#d8dee9"/>
+</svg>
