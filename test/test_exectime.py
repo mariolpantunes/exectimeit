@@ -1,14 +1,14 @@
+__author__ = "Mário Antunes"
+__version__ = "0.2.0"
+__email__ = "mario.antunes@ua.pt"
+__status__ = "Development"
+
 # coding: utf-8
 
 """
 Substantial unit tests for exectimeit.
 Covers mock-timing math, real-timing tests, decorator metadata, and error handling.
 """
-
-__author__ = "Mário Antunes"
-__version__ = "0.2.0"
-__email__ = "mariolpantunes@gmail.com"
-__status__ = "Development"
 
 
 import time
@@ -42,7 +42,7 @@ def stateful_fn(threshold: int = 3):
 
 
 @exectime(3)
-def decorated_fn(x, y):
+def decorated_fn(x: int, y: int) -> int:
     """Docstring for decorated_fn."""
     return x + y
 
@@ -52,6 +52,12 @@ class MockTimer:
     Deterministic mock timer to simulate exact execution times and timer overheads.
     T_k = k * t_exec + t_overhead.
     """
+
+    t_exec: float
+    t_overhead: float
+    current_time: float
+    k: int
+    state: int
 
     def __init__(self, t_exec: float, t_overhead: float):
         self.t_exec = t_exec
@@ -137,31 +143,17 @@ class TestExecTime(unittest.TestCase):
         Verify that n <= 2 raises a RuntimeError.
         """
         with self.assertRaises(RuntimeError) as ctx:
-            timeit(2, dummy_fn)
+            _ = timeit(2, dummy_fn)
         self.assertIn("iterations too low", str(ctx.exception))
 
         with self.assertRaises(RuntimeError):
-            timeit(1, dummy_fn)
+            _ = timeit(1, dummy_fn)
 
     def test_negative_slope_exception(self):
         """
         Verify that a negative estimated execution time (negative slope)
         correctly raises a RuntimeError.
         """
-        # Mock timer that returns decreasing durations as k increases
-        # (e.g. k=1: 1000ns, k=2: 500ns, k=3: 100ns)
-        durations = [1000.0, 500.0, 100.0]
-        iterator = iter(durations)
-
-        def decreasing_timer():
-            # For each iteration, begin = 0, end = next value
-            # This is simple and triggers the negative slope
-            try:
-                val = next(iterator)
-                return val
-            except StopIteration:
-                return 0.0
-
         # We need to return:
         # k=1: begin=0, end=1000
         # k=2: begin=0, end=500
@@ -169,7 +161,7 @@ class TestExecTime(unittest.TestCase):
         mock_seq = [0, 1000, 0, 500, 0, 100]
         with patch("time.perf_counter_ns", side_effect=mock_seq):
             with self.assertRaises(RuntimeError) as ctx:
-                timeit(3, dummy_fn)
+                _ = timeit(3, dummy_fn)
             self.assertIn("Negative execution time", str(ctx.exception))
 
     def test_real_timer_fast_sleep(self):
@@ -195,14 +187,14 @@ class TestExecTime(unittest.TestCase):
 
         # Collinear inputs on x should raise ValueError
         with self.assertRaises(ValueError):
-            linear_regression([1.0, 1.0], [2.0, 3.0])
+            _ = linear_regression([1.0, 1.0], [2.0, 3.0])
 
     def test_rse_helper_boundary(self):
         """
         Verify the RSE helper error conditions.
         """
         with self.assertRaises(ValueError):
-            RSE([1.0, 2.0], [1.1, 1.9])
+            _ = RSE([1.0, 2.0], [1.1, 1.9])
 
 
 if __name__ == "__main__":

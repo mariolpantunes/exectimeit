@@ -49,10 +49,12 @@ jobs:
           # Ensure root assets are available for index page
           mkdir -p docs/assets
           cp assets/logo.svg docs/assets/logo.svg
+          cp assets/linear_fit.svg docs/assets/linear_fit.svg
 
           # Ensure module assets are available for sub-pages
           mkdir -p docs/exectimeit/assets
           cp assets/logo.svg docs/exectimeit/assets/logo.svg
+          cp assets/linear_fit.svg docs/exectimeit/assets/linear_fit.svg
 
           # Prevent GitHub Pages from using Jekyll
           touch docs/.nojekyll

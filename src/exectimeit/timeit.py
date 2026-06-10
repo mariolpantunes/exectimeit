@@ -1,14 +1,14 @@
+__author__ = "Mário Antunes"
+__version__ = "0.2.0"
+__email__ = "mario.antunes@ua.pt"
+__status__ = "Development"
+
 # coding: utf-8
 
 """
 Core implementation of exectimeit.
 Implements the timeit function and exectime decorator.
 """
-
-__author__ = "Mário Antunes"
-__version__ = "0.2.0"
-__email__ = "mariolpantunes@gmail.com"
-__status__ = "Development"
 
 
 import functools
@@ -139,9 +139,9 @@ def timeit(n: int, fn: Callable[..., T], *args: Any, **kwargs: Any) -> ExecTimeR
     $$
     T_k = k \\cdot t_{exec} + t_{overhead} + \\epsilon_k
     $$
-    where $t_{exec}$ is the actual execution time, $t_{overhead}$ is the fixed
-    measurement overhead (timer calls), and $\\epsilon_k$ is the random error.
-    Using simple linear regression, the slope represents $t_{exec}$.
+    where $$t_{exec}$$ is the actual execution time, $$t_{overhead}$$ is the fixed
+    measurement overhead (timer calls), and $$\\epsilon_k$$ is the random error.
+    Using simple linear regression, the slope represents $$t_{exec}$$.
 
     Args:
         n       (int): number of repetitions (recommended >= 3)

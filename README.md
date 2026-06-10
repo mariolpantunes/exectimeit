@@ -34,6 +34,10 @@ By fitting a simple linear regression $y = m \cdot x + b$ to the data points $(k
 * The **Residual Standard Error (RSE)** provides a precise measure of the variation or noise:
   $$rse = \sqrt{\frac{\sum (y_i - \hat{y}_i)^2}{n - 2}}$$
 
+<p align="center">
+  <img src="assets/linear_fit.svg" alt="Linear Fit Representation" width="550">
+</p>
+
 To eliminate loop iteration overhead in Python, `exectimeit` dynamically compiles and caches unrolled execution routines for each $k$.
 
 ---
