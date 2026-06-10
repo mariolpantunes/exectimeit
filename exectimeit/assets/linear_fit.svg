@@ -1,5 +1,4 @@
 <svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-  <!-- Styles -->
   <style>
     .bg { fill: #2e3440; rx: 16px; }
     .grid { stroke: #4c566a; stroke-width: 1; stroke-dasharray: 4,4; }
@@ -15,13 +14,10 @@
     .slope-text { font-family: 'Inter', sans-serif; font-size: 11px; fill: #ebcb8b; }
   </style>
 
-  <!-- Background -->
   <rect class="bg" width="600" height="400"/>
 
-  <!-- Title -->
-  <text class="title" x="300" y="30" class="title">Linear Regression Fit: T_k = k · t_exec + t_overhead + ε_k</text>
+  <text class="title" x="300" y="30">Linear Regression Fit: T_k = k · t_exec + t_overhead + ε_k</text>
 
-  <!-- Grid lines (horizontal) -->
   <line class="grid" x1="80" y1="290" x2="540" y2="290"/>
   <line class="grid" x1="80" y1="245" x2="540" y2="245"/>
   <line class="grid" x1="80" y1="200" x2="540" y2="200"/>
@@ -29,19 +25,14 @@
   <line class="grid" x1="80" y1="110" x2="540" y2="110"/>
   <line class="grid" x1="80" y1="65" x2="540" y2="65"/>
 
-  <!-- Axes -->
-  <!-- Y Axis (Time) -->
   <line class="axis" x1="80" y1="340" x2="80" y2="50"/>
   <polygon class="axis-arrow" points="80,45 76,55 84,55"/>
-  <!-- X Axis (Repetitions) -->
   <line class="axis" x1="80" y1="340" x2="550" y2="340"/>
   <polygon class="axis-arrow" points="555,340 545,336 545,344"/>
 
-  <!-- Axis Labels -->
   <text class="label" x="95" y="60" font-weight="bold">Measured Time (T_k)</text>
   <text class="label" x="430" y="375" font-weight="bold">Repetitions (k)</text>
 
-  <!-- X-Axis Ticks & Labels -->
   <line class="axis" x1="160" y1="340" x2="160" y2="345"/>
   <text class="label" x="156" y="360">1</text>
 
@@ -57,51 +48,38 @@
   <line class="axis" x1="480" y1="340" x2="480" y2="345"/>
   <text class="label" x="476" y="360">5</text>
 
-  <!-- Y-Axis Origin / Zero indicator -->
   <text class="label" x="65" y="344">0</text>
 
-  <!-- Fit Line: Y = 290 - k * 45 -->
   <line class="fit-line" x1="80" y1="290" x2="520" y2="101"/>
 
-  <!-- Intercept Callout (y-intercept at k=0, Y=290) -->
   <circle cx="80" cy="290" r="4" fill="#a3be8c"/>
   <line class="callout-line" x1="80" y1="290" x2="180" y2="290"/>
   <text class="callout-text" x="190" y="294">Intercept (b) = t_overhead (Timer overhead)</text>
 
-  <!-- Slope Callout (Rise/Run Triangle at k=3 and k=4) -->
-  <!-- Run (dx) -->
   <line class="slope-line" x1="320" y1="155" x2="400" y2="155" stroke-dasharray="2,2"/>
   <text class="slope-text" x="350" y="172">Run = 1</text>
-  <!-- Rise (dy) -->
   <line class="slope-line" x1="400" y1="155" x2="400" y2="110"/>
   <text class="slope-text" x="410" y="138">Rise = Slope (m) = t_exec</text>
 
-  <!-- Data Points (with added noise ε_k) -->
-  <!-- k=1: True Y=245, Measured Y=251 -->
   <circle class="data-point" cx="160" cy="251" r="6"/>
   <line stroke="#bf616a" stroke-width="1" x1="160" y1="245" x2="160" y2="251"/>
 
-  <!-- k=2: True Y=200, Measured Y=194 -->
   <circle class="data-point" cx="240" cy="194" r="6"/>
   <line stroke="#bf616a" stroke-width="1" x1="240" y1="200" x2="240" y2="194"/>
 
-  <!-- k=3: True Y=155, Measured Y=163 -->
   <circle class="data-point" cx="320" cy="163" r="6"/>
   <line stroke="#bf616a" stroke-width="1" x1="320" y1="155" x2="320" y2="163"/>
 
-  <!-- k=4: True Y=110, Measured Y=104 -->
   <circle class="data-point" cx="400" cy="104" r="6"/>
   <line stroke="#bf616a" stroke-width="1" x1="400" y1="110" x2="400" y2="104"/>
 
-  <!-- k=5: True Y=65, Measured Y=62 -->
   <circle class="data-point" cx="480" cy="62" r="6"/>
   <line stroke="#bf616a" stroke-width="1" x1="480" y1="65" x2="480" y2="62"/>
 
-  <!-- Legend -->
   <rect x="360" y="215" width="200" height="90" rx="8" fill="#3b4252" stroke="#4c566a" stroke-width="1.5"/>
   <circle class="data-point" cx="380" cy="235" r="5"/>
   <text class="label" x="400" y="239">Data Point (k, T_k)</text>
-  
+
   <line class="fit-line" x1="370" y1="260" x2="390" y2="260"/>
   <text class="label" x="400" y="264">Fitted Line (Slope = t_exec)</text>
 
