@@ -110,17 +110,7 @@ python3 -m unittest discover -s test
 
 ## Documentation
 
-Detailed package documentation is hosted on GitHub Pages:
-[https://mariolpantunes.github.io/exectimeit/](https://mariolpantunes.github.io/exectimeit/)
-
-To generate the docs locally:
-
-```bash
-pip install pdoc
-PYTHONPATH=src pdoc --math -d google -o docs exectimeit \
-  --logo "assets/logo.svg" \
-  --favicon "assets/logo.svg"
-```
+Detailed package documentation is hosted on [GitHub Pages](https://mariolpantunes.github.io/exectimeit/)
 
 ---
 
